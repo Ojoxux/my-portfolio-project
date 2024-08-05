@@ -157,14 +157,13 @@ const Skills = forwardRef((props, ref) => {
                 title: 'FrontEnd',
                 icons: [
                   'javascript',
+                  'typescript',
                   'html5',
                   'css3',
                   'react',
-                  'vuejs',
                   'jquery',
                   'tailwindcss',
                   'vitejs',
-                  'figma',
                 ],
                 emoji: '💻',
               },
@@ -182,14 +181,21 @@ const Skills = forwardRef((props, ref) => {
                   'java',
                   'python',
                   'unity',
-                  'swift',
-                  'opencv',
-                  'tensorflow',
+                  'figma',
                   'git',
                   'github',
                 ],
                 emoji: '🛠️',
               },
+              {
+                title: 'Mobile Development',
+                icons: [
+                  'swift',
+                  'flutter', // Flutterも追加すると良いかもしれません
+                ],
+                emoji: '📱',
+              },
+              /*
               {
                 title: 'Studying',
                 icons: [
@@ -202,6 +208,7 @@ const Skills = forwardRef((props, ref) => {
                 ],
                 emoji: '✏️',
               },
+              */
             ].map((category, index) => (
               <SkillCategory
                 key={index}
