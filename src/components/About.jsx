@@ -101,7 +101,6 @@ const About = forwardRef((props, ref) => {
             repeatType: 'reverse',
           },
         }}
-        //style={{ zIndex: 1 }}
       />
 
       {/* Content */}
@@ -128,15 +127,12 @@ const About = forwardRef((props, ref) => {
             About Me
           </MotionHeading>
           <MotionText
-            fontSize={{ base: 'lg', md: 'xl' }}
+            fontSize={{ base: 'md', md: 'lg' }}
             textAlign='center'
             lineHeight='tall'
             maxW='2xl'
           >
-            As a passionate frontend developer, I craft elegant and intuitive
-            user experiences. With a keen eye for design and a love for clean
-            code, I bring ideas to life through the power of modern web
-            technologies.
+            はじめまして、奥山丈（おくやまじょう）です。新潟コンピュータ専門学校のIT総合学科情報システム専攻で学んでいます。Web開発、特にフロントエンド技術に情熱を注いでおり、ReactやNext.jsなどの最新技術を学んでいます。将来はユーザーフレンドリーなWebアプリケーションを開発するフルスタック開発者を目指しています。趣味は音楽鑑賞と読書で、これらを通じて創造性を養っています。チームワークを大切にし、技術と熱意を持ってプロジェクトに取り組んでいます。
           </MotionText>
         </MotionFlex>
       </Container>
