@@ -14,7 +14,13 @@ import {
   ModalCloseButton,
   Button,
 } from '@yamada-ui/react';
-import { FaGraduationCap, FaBuilding, FaChevronDown } from 'react-icons/fa';
+import {
+  FaGraduationCap,
+  FaBuilding,
+  FaChevronDown,
+  FaChevronRight,
+  FaExternalLinkAlt,
+} from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -32,25 +38,28 @@ const CareerItemDetail = ({
 }) => {
   const bgColor = useColorModeValue('white', 'gray.800');
   const textColor = useColorModeValue('gray.900', 'gray.100');
+  const borderColor = useColorModeValue('gray.200', 'gray.700');
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered size='xl'>
       <ModalOverlay backdropFilter='blur(5px)' />
-      <Box bg={bgColor} borderRadius='xl' p={6}>
-        <ModalHeader p={0}>
-          <Heading size='lg' color={textColor} fontWeight='semibold' mb={2}>
-            {title}
-          </Heading>
+      <Box bg={bgColor} borderRadius='xl' overflow='hidden' maxW='100%' m={4}>
+        <Box borderBottom='1px' borderColor={borderColor} p={6}>
+          <ModalHeader p={0} mb={2}>
+            <Heading size='lg' color={textColor} fontWeight='bold'>
+              {title}
+            </Heading>
+          </ModalHeader>
           <Text fontWeight='medium' color={textColor} fontSize='md'>
             {subtitle}
           </Text>
           <Text fontSize='sm' color='gray.500' mt={1}>
             {period}
           </Text>
-        </ModalHeader>
+        </Box>
         <ModalCloseButton />
-        <ModalBody p={0} mt={4}>
-          <Text color={textColor} fontSize='md' lineHeight='tall' mb={4}>
+        <ModalBody p={6}>
+          <Text color={textColor} fontSize='md' lineHeight='tall' mb={6}>
             {description}
           </Text>
           {link && (
@@ -59,12 +68,13 @@ const CareerItemDetail = ({
               href={link}
               target='_blank'
               rel='noopener noreferrer'
-              rightIcon={<FaChevronDown />}
-              variant='outline'
+              rightIcon={<FaExternalLinkAlt />}
               colorScheme='blue'
-              size='sm'
+              size='md'
+              fontWeight='medium'
+              w='full'
             >
-              詳細を見る
+              公式サイトを確認
             </Button>
           )}
         </ModalBody>
@@ -100,7 +110,8 @@ const CareerItem = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isHovered, setIsHovered] = useState(false);
 
-  const arrowColor = useColorModeValue('purple.400', 'blue.300');
+  const arrowColor = useColorModeValue('gray.400', 'gray.600');
+  const hoverBgColor = useColorModeValue('gray.50', 'gray.700');
 
   return (
     <MotionBox
@@ -110,37 +121,42 @@ const CareerItem = ({
     >
       <MotionBox
         bg={bgColor}
-        borderRadius='2xl'
+        borderRadius='xl'
         p={6}
-        boxShadow='lg'
+        boxShadow='sm'
         onClick={onOpen}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         cursor='pointer'
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        textAlign='center'
+        whileHover={{ backgroundColor: hoverBgColor }}
+        whileTap={{ scale: 0.98 }}
+        textAlign='left'
+        position='relative'
+        display='flex'
+        alignItems='center'
+        transition='all 0.3s'
       >
-        <MotionBox
-          initial={{ scale: 1 }}
-          animate={{ scale: isHovered ? 1.2 : 1, rotate: isHovered ? 360 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Box color={iconColor} fontSize='4xl' mb={4}>
-            {icon}
-          </Box>
-        </MotionBox>
-        <VStack spacing={2}>
-          <Text fontWeight='bold' color={headingColor} fontSize='xl'>
+        <Box color={iconColor} fontSize='3xl' mr={4}>
+          {icon}
+        </Box>
+        <VStack align='start' spacing={1} flex={1}>
+          <Text fontWeight='semibold' color={headingColor} fontSize='lg'>
             {title}
           </Text>
-          <Text fontSize='md' color={subtitleColor}>
+          <Text fontSize='sm' color={subtitleColor}>
             {subtitle}
           </Text>
-          <Text fontSize='sm' color='gray.500'>
+          <Text fontSize='xs' color='gray.500'>
             {period}
           </Text>
         </VStack>
+        <MotionBox
+          initial={{ opacity: 0.6, x: -10 }}
+          animate={{ opacity: isHovered ? 1 : 0.6, x: isHovered ? 0 : -10 }}
+          transition={{ duration: 0.2 }}
+        >
+          <FaChevronRight color={arrowColor} size={16} />
+        </MotionBox>
       </MotionBox>
       <CareerItemDetail
         isOpen={isOpen}
